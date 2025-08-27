@@ -2,58 +2,71 @@
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [articles, setArticles] = useState([]);
+  const [accueils, setAccueils] = useState([]);
 
   useEffect(() => {
-    const fetchArticles = async () => {
+    const fetchAccueils = async () => {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/articles?populate=cover`
+          `${process.env.NEXT_PUBLIC_API_URL}/api/accueils?populate=imageAccueil`
         );
         const data = await res.json();
-        setArticles(data.data || []);
+        setAccueils(data.data || []);
+        console.log("Données reçues de Strapi:", data);
+
+
       } catch (error) {
-        console.error("Erreur lors du fetch :", error);
+        console.error("Erreur lors du fetch accueil :", error);
       }
     };
 
-    fetchArticles();
+    fetchAccueils();
   }, []);
 
   return (
-    <main className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Articles</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {articles.map((article) => {
-          const { id, title, description, cover } = article;
+    <main className="p-6 background-beige">
+  
+      <div className="grid grid-cols-1 gap-6 ">
+        {accueils.map((accueil) => {
+          const { id, titre, titre2, imageAccueil } = accueil; // ⚡ mêmes champs au premier niveau
 
-          // Construction de l’URL de l’image
-        // Construction de l’URL de l’image
-const coverUrl = cover?.url
-  ? cover.url // Déjà complet grâce à Cloudinary
-  : cover?.formats?.thumbnail?.url
-  ? cover.formats.thumbnail.url
-  : null;
-
+          const imageUrl = imageAccueil?.url
+            ? imageAccueil.url // URL déjà complète via Cloudinary
+            : imageAccueil?.formats?.thumbnail?.url
+            ? imageAccueil.formats.thumbnail.url
+            : null;
 
           return (
             <div
               key={id}
-              className="border rounded-lg shadow-md p-4 bg-white hover:shadow-lg transition"
+              className="relative w-full h-[300px]  rounded-lg overflow-hidden shadow-md"
             >
-              {coverUrl ? (
+              {imageUrl ? (
                 <img
-                  src={coverUrl}
-                  alt={title}
-                  className="w-full h-48 object-cover rounded-md mb-4"
+                  src={imageUrl}
+                  alt={titre || "Image accueil"}
+                  className="w-full h-full object-cover"
+                  
                 />
+                
               ) : (
-                <p className="text-gray-400">Pas d’image</p>
+                <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                  <span className="text-gray-500">Pas d’image</span>
+                  
+                </div>
+                
               )}
-              <h2 className="text-xl font-semibold">{title || "Titre indisponible"}</h2>
-              <p className="text-gray-600 mt-2">
-                {description || "Pas de description"}
-              </p>
+              
+ <div className="absolute inset-0 flex flex-col items-center justify-center bg-opacity-40 text-center">
+  <h1 className="text-4xl text-white font-bold">{titre}</h1>
+  <h2 className="text-2xl text-white mt-2 font-bold">{titre2}</h2>
+   <button className="mt-4 px-6 py-3 bg-button text-white rounded-lg shadow-md hover:shadow-lg cursor-pointer transition">
+  Nous contacter
+</button>
+
+</div>
+
+
             </div>
           );
         })}
