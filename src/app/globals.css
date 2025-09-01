@@ -1,10 +1,13 @@
 @import "tailwindcss";
 
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
   --background-beige: #ede9d3;
   --button:#7f7c6b;
+  --background-clair : #f3f6e5;
 
 }
 
@@ -38,4 +41,8 @@ body {
 
 .color-text {
   color: var(--button);
+}
+
+.background-clair {
+  background-color : var(--background-clair);
 }
