@@ -3,26 +3,45 @@ import { useEffect, useState } from "react";
 
 export default function Services() {
   const [services, setServices] = useState([]);
+  const [presentation, setPresentation] = useState({ titre: "", description: "" });
   const [visibleCount, setVisibleCount] = useState(6); // nombre de services visibles
 
+  // Fetch des services
   useEffect(() => {
     const fetchServices = async () => {
       try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/services?populate=image`);
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         const data = await res.json();
-        console.log("Données services :", data);
-
-        if (data.data && data.data.length > 0) {
-          setServices(data.data);
-        }
+        if (data.data && data.data.length > 0) setServices(data.data);
       } catch (error) {
         console.error("Erreur lors du fetch des services :", error);
       }
     };
-
     fetchServices();
   }, []);
+
+  // Fetch de la présentation
+useEffect(() => {
+  const fetchPresentation = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/presentation-services?populate=*`);
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      const data = await res.json();
+      if (data.data && data.data.length > 0) {
+        setPresentation({
+          titre: data.data[0].titre,
+          description: data.data[0].description,
+        });
+      }
+    } catch (error) {
+      console.error("Erreur lors du fetch de la présentation :", error);
+    }
+  };
+  fetchPresentation();
+}, []);
+
+
 
   if (!services || services.length === 0)
     return <p className="p-6">Chargement des services...</p>;
@@ -32,12 +51,10 @@ export default function Services() {
   return (
     <section className="p-6 background-beige">
       <h2 className="text-3xl color-text font-bold mb-6 text-center">
-        Nos savoir-faire à votre service
+        {presentation.titre }
       </h2>
       <p className="text-xl mb-6 text-center">
-        Chez H.C.R, nous mettons notre expertise au service de tous vos projets
-        de rénovation. Chaque métier est pris en charge par des professionnels
-        qualifiés pour garantir un résultat soigné, durable et à votre image.
+        {presentation.description }
       </p>
 
       {/* Cards */}
