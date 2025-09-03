@@ -8,10 +8,13 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 // Composant pour un slider unique
-function TransformationSlider({ images, description }) {
+function TransformationSlider({ images, description, sliderId }) {
   const swiperRef = useRef(null);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
+
+  // Stocker le fit choisi par image
+  const [fits, setFits] = useState([]);
 
   useEffect(() => {
     if (swiperRef.current && prevRef.current && nextRef.current) {
@@ -24,26 +27,66 @@ function TransformationSlider({ images, description }) {
     }
   }, [images]);
 
+  // Charger les dimensions réelles des images pour décider du fit
+  useEffect(() => {
+    const loadFits = async () => {
+      const promises = images.map(
+        (url) =>
+          new Promise((resolve) => {
+            const img = new Image();
+            img.src = url;
+            img.onload = () => {
+              const ratio = img.width / img.height;
+              const containerRatio = 16 / 9; // même que aspect-[16/9]
+              const diff = Math.abs(ratio - containerRatio);
+
+              // si ratio proche → cover, sinon contain
+              if (diff < 0.3) {
+                resolve("object-cover");
+              } else {
+                resolve("object-contain");
+              }
+            };
+            img.onerror = () => resolve("object-contain"); // fallback
+          })
+      );
+
+      const results = await Promise.all(promises);
+      setFits(results);
+    };
+
+    if (images.length > 0) {
+      loadFits();
+    }
+  }, [images]);
+
   return (
-    <div className="  p-4 relative">
+    <div className="relative w-full">
       <Swiper
         ref={swiperRef}
         modules={[Navigation, Pagination]}
         loop={true}
         slidesPerView={1}
         spaceBetween={20}
-        pagination={{ clickable: true }}
-        navigation={false} // sera initialisé dans useEffect
-        className="w-full h-[300px] sm:h-[400px] lg:h-[500px]"
+       // pagination={{
+      //    clickable: true,
+        //  el: `.pagination-${sliderId}`,
+       // }}
+        navigation={false}
+        className="w-full"
       >
         {images.map((url, idx) => (
-          <SwiperSlide key={idx}>
-            <img
-              src={url}
-              alt={`Slide ${idx + 1}`}
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
+<SwiperSlide key={idx}>
+  <div className="w-[600px] max-w-full flex items-center justify-center rounded-lg overflow-hidden background-clair mx-auto">
+    <img
+      src={url}
+      alt={`Slide ${idx + 1}`}
+      className={`max-w-full max-h-[400px] ${fits[idx] || "object-contain"}`}
+    />
+  </div>
+</SwiperSlide>
+
+
         ))}
       </Swiper>
 
@@ -63,11 +106,16 @@ function TransformationSlider({ images, description }) {
         ›
       </button>
 
-      {description && (
-        <p className="mt-4 text-center text-gray-700 whitespace-pre-line">
-          {description}
-        </p>
-      )}
+    {/* Pagination individuelle juste sous le slider */}
+{/* <div className={`pagination-${sliderId} mt-2 flex justify-center`}></div> */}
+
+
+ {description && (
+  <p className="mt-2 text-center text-gray-700 whitespace-pre-line">
+    {description}
+  </p>
+)}
+
     </div>
   );
 }
@@ -97,11 +145,11 @@ export default function Slider() {
 
   return (
     <section className="p-6 background-clair">
-      <h2 className="text-3xl font-bold text-center mb-8 color-text">
-       Avant / Après : nos réalisations en image
+      <h2 id="photos" className="text-3xl font-bold text-center mb-8 color-text">
+        Avant / Après : nos réalisations en image
       </h2>
 
-      <div className="space-y-12">
+      <div className="space-y-6">
         {items.length === 0 ? (
           <p className="text-center text-lg">Chargement des transformations...</p>
         ) : (
@@ -119,6 +167,7 @@ export default function Slider() {
                 key={item.id}
                 images={images}
                 description={item.description}
+                sliderId={item.id} // identifiant unique pour la pagination
               />
             );
           })

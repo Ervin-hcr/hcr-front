@@ -27,7 +27,7 @@ export default function Gallery() {
   }, []);
 
   if (!photos || photos.length === 0)
-    return <p className="p-6">Chargement des photos...</p>;
+    return <p className="p-6 text-center">Chargement des photos...</p>;
 
   const allVisible = visibleCount >= photos.length;
 
@@ -37,33 +37,35 @@ export default function Gallery() {
         De nombreux autres travaux à découvrir
       </h2>
 
-      <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {photos.slice(0, visibleCount).map((photoItem) => {
-          const imageUrl =
-            photoItem.image?.[0]?.formats?.medium?.url ||
-            photoItem.image?.[0]?.url ||
-            null;
+  <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+  {photos.slice(0, visibleCount).map((photoItem) => {
+    const imageUrl =
+      photoItem.image?.[0]?.formats?.medium?.url ||
+      photoItem.image?.[0]?.url ||
+      null;
 
-          return (
-            <div
-              key={photoItem.id}
-              className="bg-gray-100 rounded-lg overflow-hidden"
-            >
-              {imageUrl ? (
-                <img
-                  src={imageUrl}
-                  alt={`Photo ${photoItem.id}`}
-                  className="w-full h-48 object-cover"
-                />
-              ) : (
-                <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
-                  <span className="text-gray-500">Pas d'image</span>
-                </div>
-              )}
-            </div>
-          );
-        })}
+    return (
+      <div
+        key={photoItem.id}
+        className="rounded-lg overflow-hidden w-full flex items-center justify-center sm:h-40 md:h-60 lg:h-48"
+      >
+        {imageUrl ? (
+          <img
+            src={imageUrl}
+            alt={`Photo ${photoItem.id}`}
+            className="w-full h-full object-contain"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <span className="text-gray-500">Pas d'image</span>
+          </div>
+        )}
       </div>
+    );
+  })}
+</div>
+
+
 
       {photos.length > 6 && (
         <div className="flex justify-center mt-6">

@@ -30,8 +30,8 @@ export default function Business() {
 
   return (
 <section className="p-6 background-beige shadow-md text-center">
-  <h2 className="text-3xl font-bold mb-4 color-text">{titre}</h2>
-  <p className="text-gray-700 whitespace-pre-line">{presentationEntreprise}</p>
+  <h2 id="entreprise" className="text-3xl font-bold mb-4 color-text {`${poppins.className} antialiased`}">{titre}</h2>
+  <p className="text-gray-700 whitespace-pre-line font-roboto">{presentationEntreprise}</p>
 </section>
 
   );

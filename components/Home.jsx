@@ -60,9 +60,12 @@ export default function Home() {
  <div className="absolute inset-0 flex flex-col items-center justify-center bg-opacity-40 text-center">
   <h1 className="text-4xl text-white font-bold">{titre}</h1>
   <h2 className="text-2xl text-white mt-2 font-bold">{titre2}</h2>
-   <button className="mt-4 px-6 py-3 bg-button text-white rounded-lg shadow-md hover:shadow-lg cursor-pointer transition">
+<a
+  href="#contact"
+  className="mt-4 px-6 py-3 bg-button text-white rounded-lg shadow-md hover:shadow-lg cursor-pointer transition block text-center rounded-lg"
+>
   Nous contacter
-</button>
+</a>
 
 </div>
 
