@@ -50,7 +50,7 @@ const Nav = () => {
     <div className="relative">
       {/* Menu de bureau : visible à partir de 1024px */}
       <ul
-  className={`hidden lg:flex fixed top-0 left-0 w-full h-20 text-3xl z-50 px-4 background-beige shadow-lg animenu ${
+  className={`hidden lg:flex fixed top-0 left-0 w-full h-20 text-2xl z-50 px-4 background-beige mb-6 shadow-lg animenu ${
     isDesktopMenuVisible ? "animenu-visible" : "animenu-hidden"
   }`}
 >

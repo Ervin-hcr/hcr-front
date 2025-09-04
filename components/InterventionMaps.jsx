@@ -1,10 +1,10 @@
 export default function InterventionMap() {
   return (
     <section className="p-6 background-beige">
-      <h2 id="zones" className="text-3xl color-text font-bold text-center mb-4">
+      <h2 id="zones" className="text-3xl color-text font-bold text-center mb-4 md:text-4xl">
         Nos zones d'intervention
       </h2>
-   <p className="text-center mb-4 text-gray-700">
+   <p className="text-center mb-4 text-gray-700 md:text-2xl">
   Basée à Amnéville, H.C.R intervient au Luxembourg, à Metz, à Nancy et dans les environs pour tous vos projets de rénovation.
 </p>
 

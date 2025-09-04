@@ -52,13 +52,14 @@ export default function ContactForm() {
 }, []);
 
   return (
-    <div className="max-w-md mx-auto p-6 background-clair rounded-2xl shadow-md">
+<div className="max-w-md mx-auto p-6 background-clair rounded-2xl shadow-md md:max-w-full md:mx-0">
+
       <h2
-        className={`${poppins.className} text-3xl text-center color-text font-bold mb-4`}
+        className={`${poppins.className} text-3xl text-center color-text font-bold mb-4 md:text-4xl`}
       >
         Nous contacter
       </h2>
-      <p className="text-center text-gray-700 mb-4">
+      <p className="text-center text-gray-700 mb-4 md:text-2xl">
         Une question, un projet ? Écrivez-nous directement via le formulaire de
         contact.
       </p>
@@ -99,7 +100,7 @@ export default function ContactForm() {
 
       {/* Coordonnées depuis Strapi */}
   {coords && (
-  <div className="text-center mt-6 leading-tight text-gray-700 text-xl">
+  <div className="text-center mt-6 leading-tight text-gray-700 text-xl md:text-2xl">
     <p className="font-semibold">{coords.entreprise}</p>
     <p>{coords.adresse}</p>
     <p>{coords.ville}</p>

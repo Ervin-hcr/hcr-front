@@ -61,57 +61,52 @@ function TransformationSlider({ images, description, sliderId }) {
   }, [images]);
 
   return (
-    <div className="relative w-full">
-      <Swiper
-        ref={swiperRef}
-        modules={[Navigation, Pagination]}
-        loop={true}
-        slidesPerView={1}
-        spaceBetween={20}
-       // pagination={{
-      //    clickable: true,
-        //  el: `.pagination-${sliderId}`,
-       // }}
-        navigation={false}
-        className="w-full"
-      >
-        {images.map((url, idx) => (
-<SwiperSlide key={idx}>
-  <div className="w-[600px] max-w-full flex items-center justify-center rounded-lg overflow-hidden background-clair mx-auto">
-    <img
-      src={url}
-      alt={`Slide ${idx + 1}`}
-      className={`max-w-full max-h-[400px] ${fits[idx] || "object-contain"}`}
-    />
-  </div>
-</SwiperSlide>
+   <div className="w-full md:w-[90%] mx-auto relative">
+  <Swiper
+    ref={swiperRef}
+    modules={[Navigation, Pagination]}
+    loop={true}
+    slidesPerView={1}
+    spaceBetween={20}
+    navigation={false}
+    className="w-full"
+  >
+    {images.map((url, idx) => (
+      <SwiperSlide key={idx} className="flex justify-center">
+        <div className="w-full flex items-center justify-center rounded-lg overflow-hidden background-clair md:h-[600px]">
+          <img
+            src={url}
+            alt={`Slide ${idx + 1}`}
+            className="w-full h-full md:inline-block md:mx-auto object-contain md:object-contain"
+          />
+        </div>
+      </SwiperSlide>
+    ))}
+  </Swiper>
 
+  {/* Chevrons */}
+  <button
+    ref={prevRef}
+    className="absolute left-2 top-1/2 -translate-y-1/2 z-10 text-white text-3xl bg-black/50 p-2 rounded-full hover:bg-black/70 transition"
+    aria-label="Image précédente"
+  >
+    ‹
+  </button>
+  <button
+    ref={nextRef}
+    className="absolute right-2 top-1/2 -translate-y-1/2 z-10 text-white text-3xl bg-black/50 p-2 rounded-full hover:bg-black/70 transition"
+    aria-label="Image suivante"
+  >
+    ›
+  </button>
 
-        ))}
-      </Swiper>
-
-      {/* Chevrons */}
-      <button
-        ref={prevRef}
-        className="absolute left-2 top-1/2 -translate-y-1/2 z-10 text-white text-3xl bg-black/50 p-2 rounded-full hover:bg-black/70 transition"
-        aria-label="Image précédente"
-      >
-        ‹
-      </button>
-      <button
-        ref={nextRef}
-        className="absolute right-2 top-1/2 -translate-y-1/2 z-10 text-white text-3xl bg-black/50 p-2 rounded-full hover:bg-black/70 transition"
-        aria-label="Image suivante"
-      >
-        ›
-      </button>
 
     {/* Pagination individuelle juste sous le slider */}
 {/* <div className={`pagination-${sliderId} mt-2 flex justify-center`}></div> */}
 
 
  {description && (
-  <p className="mt-2 text-center text-gray-700 whitespace-pre-line">
+  <p className="mt-2 text-center text-gray-700 whitespace-pre-line md:text-2xl">
     {description}
   </p>
 )}
@@ -145,7 +140,7 @@ export default function Slider() {
 
   return (
     <section className="p-6 background-clair">
-      <h2 id="photos" className="text-3xl font-bold text-center mb-8 color-text">
+      <h2 id="photos" className="text-3xl font-bold text-center mb-8 color-text md:text-4xl">
         Avant / Après : nos réalisations en image
       </h2>
 

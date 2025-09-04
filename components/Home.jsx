@@ -39,7 +39,7 @@ export default function Home() {
           return (
             <div
               key={id}
-              className="relative w-full h-[300px]  rounded-lg overflow-hidden shadow-md"
+              className="relative w-full h-[300px]  rounded-lg overflow-hidden shadow-md md:top-12 md:mb-[50px]"
             >
               {imageUrl ? (
                 <img

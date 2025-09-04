@@ -53,10 +53,10 @@ export default function Services() {
 
   return (
     <section className="p-6 background-beige">
-      <h2 id="services" className="text-3xl color-text font-bold mb-6 text-center">
+      <h2 id="services" className="text-3xl color-text font-bold mb-6 text-center md:text-4xl">
         {presentation.titre}
       </h2>
-      <p className="mb-6 text-center text-gray-700">{presentation.description}</p>
+      <p className="mb-6 text-center text-gray-700 md:text-2xl">{presentation.description}</p>
 
       <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {services.slice(0, visibleCount).map((serviceItem, index) => {
