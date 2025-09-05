@@ -13,7 +13,6 @@ function TransformationSlider({ images, description, sliderId }) {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
-  // Stocker le fit choisi par image
   const [fits, setFits] = useState([]);
 
   useEffect(() => {
@@ -27,7 +26,6 @@ function TransformationSlider({ images, description, sliderId }) {
     }
   }, [images]);
 
-  // Charger les dimensions réelles des images pour décider du fit
   useEffect(() => {
     const loadFits = async () => {
       const promises = images.map(
@@ -37,17 +35,16 @@ function TransformationSlider({ images, description, sliderId }) {
             img.src = url;
             img.onload = () => {
               const ratio = img.width / img.height;
-              const containerRatio = 16 / 9; // même que aspect-[16/9]
+              const containerRatio = 16 / 9;
               const diff = Math.abs(ratio - containerRatio);
 
-              // si ratio proche → cover, sinon contain
               if (diff < 0.3) {
                 resolve("object-cover");
               } else {
                 resolve("object-contain");
               }
             };
-            img.onerror = () => resolve("object-contain"); // fallback
+            img.onerror = () => resolve("object-contain");
           })
       );
 
@@ -61,59 +58,60 @@ function TransformationSlider({ images, description, sliderId }) {
   }, [images]);
 
   return (
-   <div className="w-full md:w-[90%] mx-auto relative">
-  <Swiper
-    ref={swiperRef}
-    modules={[Navigation, Pagination]}
-    loop={true}
-    slidesPerView={1}
-    spaceBetween={20}
-    navigation={false}
-    className="w-full"
-  >
-    {images.map((url, idx) => (
-      <SwiperSlide key={idx} className="flex justify-center">
-        <div className="w-full flex items-center justify-center rounded-lg overflow-hidden background-clair md:h-[600px]">
-          <img
-            src={url}
-            alt={`Slide ${idx + 1}`}
-            className="w-full h-full md:inline-block md:mx-auto object-contain md:object-contain"
-          />
-        </div>
-      </SwiperSlide>
-    ))}
-  </Swiper>
+    <div
+      className="
+        w-full md:w-[90%] mx-auto relative
+        lg:bg-white xl:shadow-lg xl:rounded-2xl xl:p-6
+      "
+    >
+      <Swiper
+        ref={swiperRef}
+        modules={[Navigation, Pagination]}
+        loop={true}
+        slidesPerView={1}
+        spaceBetween={20}
+        navigation={false}
+        className="w-full"
+      >
+        {images.map((url, idx) => (
+          <SwiperSlide key={idx} className="flex justify-center">
+            <div className="w-full flex items-center justify-center rounded-lg overflow-hidden sm:background-clair md:h-[600px]">
+              <img
+                src={url}
+                alt={`Slide ${idx + 1}`}
+                className="w-full h-full md:inline-block md:mx-auto object-contain md:object-contain"
+              />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
-  {/* Chevrons */}
-  <button
-    ref={prevRef}
-    className="absolute left-2 top-1/2 -translate-y-1/2 z-10 text-white text-3xl bg-black/50 p-2 rounded-full hover:bg-black/70 transition"
-    aria-label="Image précédente"
-  >
-    ‹
-  </button>
-  <button
-    ref={nextRef}
-    className="absolute right-2 top-1/2 -translate-y-1/2 z-10 text-white text-3xl bg-black/50 p-2 rounded-full hover:bg-black/70 transition"
-    aria-label="Image suivante"
-  >
-    ›
-  </button>
+      {/* Chevrons */}
+      <button
+        ref={prevRef}
+        className="absolute left-2 top-1/2 -translate-y-1/2 z-10 text-white text-3xl bg-black/50 p-2 rounded-full hover:bg-black/70 transition"
+        aria-label="Image précédente"
+      >
+        ‹
+      </button>
+      <button
+        ref={nextRef}
+        className="absolute right-2 top-1/2 -translate-y-1/2 z-10 text-white text-3xl bg-black/50 p-2 rounded-full hover:bg-black/70 transition"
+        aria-label="Image suivante"
+      >
+        ›
+      </button>
 
-
-    {/* Pagination individuelle juste sous le slider */}
-{/* <div className={`pagination-${sliderId} mt-2 flex justify-center`}></div> */}
-
-
- {description && (
-  <p className="mt-2 text-center text-gray-700 whitespace-pre-line md:text-2xl">
-    {description}
-  </p>
-)}
-
+      {description && (
+        <p className="mt-2 text-center text-gray-700 whitespace-pre-line md:text-2xl">
+          {description}
+        </p>
+      )}
     </div>
   );
 }
+
+
 
 // Composant principal qui récupère les transformations
 export default function Slider() {
@@ -140,13 +138,19 @@ export default function Slider() {
 
   return (
     <section className="p-6 background-clair">
-      <h2 id="photos" className="text-3xl font-bold text-center mb-8 color-text md:text-4xl">
+      <h2
+        id="photos"
+        className="text-3xl font-bold text-center mb-8 color-text md:text-4xl  scroll-mt-20"
+      >
         Avant / Après : nos réalisations en image
       </h2>
 
-      <div className="space-y-6">
+      {/* ✅ On passe en grille : 1 colonne mobile/tablette, 2 colonnes desktop */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         {items.length === 0 ? (
-          <p className="text-center text-lg">Chargement des transformations...</p>
+          <p className="text-center text-lg">
+            Chargement des transformations...
+          </p>
         ) : (
           items.map((item) => {
             const images = [
@@ -162,7 +166,7 @@ export default function Slider() {
                 key={item.id}
                 images={images}
                 description={item.description}
-                sliderId={item.id} // identifiant unique pour la pagination
+                sliderId={item.id} // identifiant unique
               />
             );
           })
