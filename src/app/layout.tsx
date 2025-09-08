@@ -65,98 +65,98 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
-      <head>
-        {/* JSON-LD SEO Local + Services + FAQ */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@graph": [
+<html lang="fr">
+  <head>
+    {/* JSON-LD pour HomeAndConstructionBusiness */}
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "HomeAndConstructionBusiness",
+          name: "HCR Amnéville",
+          url: "https://www.hcr-amneville.fr",
+          logo: "/favicon.ico",
+          description:
+            "HCR Amnéville réalise vos travaux de rénovation et aménagement intérieur/extérieur à Amnéville, Metz, Nancy et Luxembourg : maçonnerie, plomberie, peinture, menuiserie.",
+          telephone: "+33 6 68 85 62 93",
+          email: "hcr-amneville@gmail.com",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "9B rue Saint-Charles",
+            addressLocality: "Amnéville",
+            postalCode: "57360",
+            addressCountry: "FR",
+          },
+          contactPoint: {
+            "@type": "ContactPoint",
+            contactType: "customer service",
+            telephone: "+33 6 68 85 62 93",
+            email: "hcr-amneville@gmail.com",
+            areaServed: "FR",
+            availableLanguage: "fr",
+          },
+          areaServed: "FR",
+          sameAs: [
+            "https://www.facebook.com/100063894768191/about/?_rdr",
+            "https://www.instagram.com/h.c.r_sasu/",
+          ],
+        }),
+      }}
+    />
+
+    {/* JSON-LD pour Services + FAQ */}
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Service",
+              serviceType: "Rénovation complète TCE",
+              provider: { "@type": "HomeAndConstructionBusiness", name: "HCR Amnéville" },
+              areaServed: "Amnéville, Metz, Nancy, Luxembourg",
+            },
+            {
+              "@type": "Service",
+              serviceType: "Plomberie et sanitaires",
+              provider: { "@type": "HomeAndConstructionBusiness", name: "HCR Amnéville" },
+              areaServed: "Amnéville, Metz, Nancy, Luxembourg",
+            },
+            {
+              "@type": "Service",
+              serviceType: "Peinture et revêtements muraux",
+              provider: { "@type": "HomeAndConstructionBusiness", name: "HCR Amnéville" },
+              areaServed: "Amnéville, Metz, Nancy, Luxembourg",
+            },
+            {
+              "@type": "FAQPage",
+              mainEntity: [
                 {
-                  "@type": "HomeAndConstructionBusiness",
-                  name: "HCR Amnéville",
-                  url: "https://www.hcr-amneville.fr",
-                  logo: "/favicon.ico",
-                  description:
-                    "HCR Amnéville réalise vos travaux de rénovation et aménagement intérieur/extérieur à Amnéville, Metz, Nancy et Luxembourg : maçonnerie, plomberie, peinture, menuiserie.",
-                  telephone: "+33 6 68 85 62 93",
-                  email: "hcr-amneville@gmail.com",
-                  areaServed: "FR",
-                  sameAs: [
-                    "https://www.facebook.com/100063894768191/about/?_rdr",
-                    "https://www.instagram.com/h.c.r_sasu/",
-                  ],
-                  address: {
-                    "@type": "PostalAddress",
-                    streetAddress: "9B rue Saint-Charles",
-                    addressLocality: "Amnéville",
-                    postalCode: "57360",
-                    addressCountry: "FR",
-                  },
-                  contactPoint: {
-                    "@type": "ContactPoint",
-                    contactType: "customer service",
-                    telephone: "+33 6 68 85 62 93",
-                    email: "hcr-amneville@gmail.com",
-                    areaServed: "FR",
-                    availableLanguage: "fr",
+                  "@type": "Question",
+                  name: "Quels services propose HCR Amnéville ?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Maçonnerie, plomberie, peinture, menuiserie, rénovation complète TCE, aménagement intérieur et extérieur.",
                   },
                 },
                 {
-                  "@type": "Service",
-                  serviceType: "Rénovation complète TCE",
-                  provider: {
-                    "@type": "HomeAndConstructionBusiness",
-                    name: "HCR Amnéville",
+                  "@type": "Question",
+                  name: "Quels sont les secteurs desservis ?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Amnéville, Metz, Nancy et Luxembourg.",
                   },
-                  areaServed: "Amnéville, Metz, Nancy, Luxembourg",
-                },
-                {
-                  "@type": "Service",
-                  serviceType: "Plomberie et sanitaires",
-                  provider: {
-                    "@type": "HomeAndConstructionBusiness",
-                    name: "HCR Amnéville",
-                  },
-                  areaServed: "Amnéville, Metz, Nancy, Luxembourg",
-                },
-                {
-                  "@type": "Service",
-                  serviceType: "Peinture et revêtements muraux",
-                  provider: {
-                    "@type": "HomeAndConstructionBusiness",
-                    name: "HCR Amnéville",
-                  },
-                  areaServed: "Amnéville, Metz, Nancy, Luxembourg",
-                },
-                {
-                  "@type": "FAQPage",
-                  mainEntity: [
-                    {
-                      "@type": "Question",
-                      name: "Quels services propose HCR Amnéville ?",
-                      acceptedAnswer: {
-                        "@type": "Answer",
-                        text: "Maçonnerie, plomberie, peinture, menuiserie, rénovation complète TCE, aménagement intérieur et extérieur.",
-                      },
-                    },
-                    {
-                      "@type": "Question",
-                      name: "Quels sont les secteurs desservis ?",
-                      acceptedAnswer: {
-                        "@type": "Answer",
-                        text: "Amnéville, Metz, Nancy et Luxembourg.",
-                      },
-                    },
-                  ],
                 },
               ],
-            }),
-          }}
-        />
-      </head>
+            },
+          ],
+        }),
+      }}
+    />
+  </head>
+
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
