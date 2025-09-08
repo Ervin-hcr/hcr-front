@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 // Composant pour un slider unique
-function TransformationSlider({ images, description, sliderId }) {
+function TransformationSlider({ images, description, sliderId, toFullUrl }) {
   const swiperRef = useRef(null);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -29,10 +29,10 @@ function TransformationSlider({ images, description, sliderId }) {
   useEffect(() => {
     const loadFits = async () => {
       const promises = images.map(
-        (url) =>
+        (image) =>
           new Promise((resolve) => {
             const img = new Image();
-            img.src = url;
+            img.src = toFullUrl(image.url);
             img.onload = () => {
               const ratio = img.width / img.height;
               const containerRatio = 16 / 9;
@@ -55,15 +55,10 @@ function TransformationSlider({ images, description, sliderId }) {
     if (images.length > 0) {
       loadFits();
     }
-  }, [images]);
+  }, [images, toFullUrl]);
 
   return (
-    <div
-      className="
-        w-full md:w-[90%] mx-auto relative
-        lg:bg-white xl:shadow-lg xl:rounded-2xl xl:p-6
-      "
-    >
+    <div className="w-full md:w-[90%] mx-auto relative lg:bg-white xl:shadow-lg xl:rounded-2xl xl:p-6">
       <Swiper
         ref={swiperRef}
         modules={[Navigation, Pagination]}
@@ -73,13 +68,13 @@ function TransformationSlider({ images, description, sliderId }) {
         navigation={false}
         className="w-full"
       >
-        {images.map((url, idx) => (
+        {images.map((image, idx) => (
           <SwiperSlide key={idx} className="flex justify-center">
             <div className="w-full flex items-center justify-center rounded-lg overflow-hidden sm:background-clair md:h-[600px]">
               <img
-                src={url}
-                alt={`Slide ${idx + 1}`}
-                className="w-full h-full md:inline-block md:mx-auto object-contain md:object-contain"
+                src={toFullUrl(image.url)}
+                alt={image.alternativeText || "Rénovation par HCR Amnéville"}
+                className={`w-full h-full md:inline-block md:mx-auto ${fits[idx] || "object-contain"}`}
               />
             </div>
           </SwiperSlide>
@@ -111,8 +106,6 @@ function TransformationSlider({ images, description, sliderId }) {
   );
 }
 
-
-
 // Composant principal qui récupère les transformations
 export default function Slider() {
   const [items, setItems] = useState([]);
@@ -140,33 +133,29 @@ export default function Slider() {
     <section className="p-6 background-clair">
       <h2
         id="photos"
-        className="text-3xl font-bold text-center mb-8 color-text md:text-4xl  scroll-mt-20"
+        className="text-3xl font-bold text-center mb-8 color-text md:text-4xl scroll-mt-20"
       >
         Avant / Après : nos réalisations en image
       </h2>
 
-      {/* ✅ On passe en grille : 1 colonne mobile/tablette, 2 colonnes desktop */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         {items.length === 0 ? (
-          <p className="text-center text-lg">
-            Chargement des transformations...
-          </p>
+          <p className="text-center text-lg">Chargement des transformations...</p>
         ) : (
           items.map((item) => {
             const images = [
-              item.image1?.[0]?.formats?.medium?.url || item.image1?.[0]?.url,
-              item.image2?.[0]?.formats?.medium?.url || item.image2?.[0]?.url,
-              item.image3?.[0]?.formats?.medium?.url || item.image3?.[0]?.url,
-            ]
-              .filter(Boolean)
-              .map(toFullUrl);
+              item.image1?.[0],
+              item.image2?.[0],
+              item.image3?.[0],
+            ].filter(Boolean);
 
             return (
               <TransformationSlider
                 key={item.id}
                 images={images}
                 description={item.description}
-                sliderId={item.id} // identifiant unique
+                sliderId={item.id}
+                toFullUrl={toFullUrl}
               />
             );
           })

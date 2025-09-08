@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.hcr-amneville.fr
+
+# Sitemaps
+Sitemap: https://www.hcr-amneville.fr/sitemap.xml

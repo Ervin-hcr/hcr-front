@@ -70,7 +70,12 @@ export default function Services() {
               className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col"
             >
               {imageUrl ? (
-                <img src={imageUrl} alt={service} className="w-full h-48 object-cover" />
+<img
+  src={imageUrl}
+  alt={image?.[0]?.alternativeText || service}
+  className="w-full h-48 object-cover"
+/>
+
               ) : (
                 <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
                   <span className="text-gray-500">Pas d'image</span>

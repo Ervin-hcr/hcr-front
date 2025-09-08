@@ -72,11 +72,12 @@ export default function Gallery() {
              sm:h-40 md:h-auto xl:w-[480px] xl:h-[400px] xl:mx-2"
 >
   {imageUrl ? (
-    <img
-      src={imageUrl}
-      alt={`Photo ${photoItem.id}`}
-      className="w-full h-auto object-contain"
-    />
+<img
+  src={imageUrl}
+  alt={photoItem.image?.[0]?.alternativeText || `Travaux HCR Amnéville ${photoItem.id}`}
+  className="w-full h-auto object-contain"
+/>
+
   ) : (
     <div className="w-full h-full flex items-center justify-center">
       <span className="text-gray-500">Pas d'image</span>

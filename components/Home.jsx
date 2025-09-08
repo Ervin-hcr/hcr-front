@@ -45,7 +45,7 @@ export default function Home() {
   {imageUrl ? (
     <img
       src={imageUrl}
-      alt={titre || "Image accueil"}
+      alt={titre || "HCR Amnéville - rénovation"}
       className="w-full h-full object-cover"
     />
   ) : (

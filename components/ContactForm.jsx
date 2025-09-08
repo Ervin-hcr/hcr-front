@@ -108,7 +108,7 @@ export default function ContactForm() {
             {coords.logo && coords.logo.length > 0 && (
               <img
                 src={coords.logo[0].url}
-                alt="Logo entreprise"
+                alt="Logo HCR Amnéville - rénovation"
                 className="mx-auto mb-4 w-32 h-auto"
               />
             )}
@@ -129,7 +129,7 @@ export default function ContactForm() {
               >
                 <img
                   src="/images/logofb.png"
-                  alt="Facebook"
+                  alt="Facebook logo"
                   className="w-7 h-7 hover:opacity-80"
                 />
               </a>
@@ -140,7 +140,7 @@ export default function ContactForm() {
               >
                 <img
                   src="/images/logoinsta.png"
-                  alt="Instagram"
+                  alt="Instagram logo"
                   className="w-7 h-7 hover:opacity-80"
                 />
               </a>
