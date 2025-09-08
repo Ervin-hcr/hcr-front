@@ -67,13 +67,13 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
-        {/* JSON-LD pour HomeAndConstructionBusiness */}
+        {/* JSON-LD pour Organisation locale */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "HomeAndConstructionBusiness",
+              "@type": "Organization",
               name: "HCR Amnéville",
               url: "https://www.hcr-amneville.fr",
               logo: "https://www.hcr-amneville.fr/favicon.ico",
@@ -88,15 +88,6 @@ export default function RootLayout({
                 postalCode: "57360",
                 addressCountry: "FR",
               },
-              contactPoint: {
-                "@type": "ContactPoint",
-                contactType: "customer service",
-                telephone: "+33 6 68 85 62 93",
-                email: "hcr-amneville@gmail.com",
-                areaServed: "FR",
-                availableLanguage: "fr",
-              },
-              areaServed: "FR",
               sameAs: [
                 "https://www.facebook.com/100063894768191/about/?_rdr",
                 "https://www.instagram.com/h.c.r_sasu/",
@@ -115,19 +106,19 @@ export default function RootLayout({
                 {
                   "@type": "Service",
                   serviceType: "Rénovation complète TCE",
-                  provider: { "@type": "HomeAndConstructionBusiness", name: "HCR Amnéville" },
+                  provider: { "@type": "Organization", name: "HCR Amnéville" },
                   areaServed: "Amnéville, Metz, Nancy, Luxembourg",
                 },
                 {
                   "@type": "Service",
                   serviceType: "Plomberie et sanitaires",
-                  provider: { "@type": "HomeAndConstructionBusiness", name: "HCR Amnéville" },
+                  provider: { "@type": "Organization", name: "HCR Amnéville" },
                   areaServed: "Amnéville, Metz, Nancy, Luxembourg",
                 },
                 {
                   "@type": "Service",
                   serviceType: "Peinture et revêtements muraux",
-                  provider: { "@type": "HomeAndConstructionBusiness", name: "HCR Amnéville" },
+                  provider: { "@type": "Organization", name: "HCR Amnéville" },
                   areaServed: "Amnéville, Metz, Nancy, Luxembourg",
                 },
                 {
