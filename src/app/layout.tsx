@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import CookieBanner from "../../components/CookieBanner";
+import ThirdPartyScripts from "../../components/ThirdPartyScripts";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+    display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -149,6 +152,9 @@ export default function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
+        <CookieBanner />
+<ThirdPartyScripts />
+
       </body>
     </html>
   );

@@ -32,7 +32,7 @@ function TransformationSlider({ images, description, sliderId, toFullUrl }) {
         (image) =>
           new Promise((resolve) => {
             const img = new Image();
-            img.src = toFullUrl(image.url);
+            img.src = toFullUrl(image.url, 800, 600);
             img.onload = () => {
               const ratio = img.width / img.height;
               const containerRatio = 16 / 9;
@@ -72,7 +72,13 @@ function TransformationSlider({ images, description, sliderId, toFullUrl }) {
           <SwiperSlide key={idx} className="flex justify-center">
             <div className="w-full flex items-center justify-center rounded-lg overflow-hidden sm:background-clair md:h-[600px]">
               <img
-                src={toFullUrl(image.url)}
+                src={toFullUrl(image.url, 800, 600)}
+                srcSet={`
+                  ${toFullUrl(image.url, 400, 300)} 400w,
+                  ${toFullUrl(image.url, 800, 600)} 800w,
+                  ${toFullUrl(image.url, 1200, 900)} 1200w
+                `}
+                sizes="(max-width: 768px) 400px, (max-width: 1024px) 800px, 1200px"
                 alt={image.alternativeText || "Rénovation par HCR Amnéville"}
                 className={`w-full h-full md:inline-block md:mx-auto ${fits[idx] || "object-contain"}`}
               />
@@ -126,8 +132,10 @@ export default function Slider() {
     fetchData();
   }, []);
 
-  const toFullUrl = (url) =>
-    url?.startsWith("http") ? url : `${process.env.NEXT_PUBLIC_API_URL}${url}`;
+  const toFullUrl = (url, width = 800, height = 600) =>
+    url?.startsWith("http")
+      ? url
+      : `${process.env.NEXT_PUBLIC_API_URL}${url}?w=${width}&h=${height}&c=fill`;
 
   return (
     <section className="p-6 background-clair">
