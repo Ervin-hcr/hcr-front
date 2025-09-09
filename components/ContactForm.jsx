@@ -168,7 +168,7 @@ export default function ContactForm() {
                   target="_blank"
             className="text-gray-700 hover:text-gray-900 underline transition-colors"
           >
-            Mentions légales
+          Mentions légales & politique de confidentialité / cookies
           </a>
         </p>
       </div>
