@@ -42,7 +42,7 @@ export default function ContactForm() {
           setCoords(data.data[0]);
         }
       } catch (err) {
-        console.error("Erreur récupération coordonnées :", err);
+      
       }
     };
     fetchCoords();
@@ -50,7 +50,7 @@ export default function ContactForm() {
 
   return (
     <div className="w-full background-clair p-6">
-      {/* Titre et texte centrés */}
+   
       <div className="max-w-7xl mx-auto mb-12">
         <h2
           id="contact"
@@ -63,9 +63,9 @@ export default function ContactForm() {
         </p>
       </div>
 
-      {/* Formulaire et coordonnées */}
+     
       <div className="max-w-7xl mx-auto xl:flex xl:items-center xl:justify-center xl:space-x-16">
-        {/* Formulaire */}
+     
         <div className="xl:w-1/2 max-w-md mx-auto md:max-w-full">
           <form ref={form} onSubmit={sendEmail} className="space-y-4">
             <input
@@ -101,10 +101,10 @@ export default function ContactForm() {
           {status && <p className="mt-4 text-center">{status}</p>}
         </div>
 
-        {/* Coordonnées et réseaux */}
+    
         {coords && (
           <div className="xl:w-1/2 mt-6 xl:mt-0 flex flex-col justify-center text-center">
-            {/* Logo */}
+         
             {coords.logo && coords.logo.length > 0 && (
               <img
                 src={coords.logo[0].url}
@@ -149,7 +149,7 @@ export default function ContactForm() {
         )}
       </div>
 
-      {/* Footer discrète */}
+
       <div className="w-full border-t border-gray-200 mt-12 pt-4 text-center text-gray-500 text-sm space-y-1">
         <p>
           Site réalisé par{" "}

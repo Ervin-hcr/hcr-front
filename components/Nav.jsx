@@ -12,17 +12,17 @@ const Nav = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Affiche le menu desktop avec animation au chargement de la page
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       setIsDesktopMenuVisible(true);
-    }, 200); // Ajoute un délai comme pour ton titre
+    }, 200); 
   
     return () => clearTimeout(timeout);
   }, []);
   
 
-  // Ferme le menu si l'utilisateur clique en dehors
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -41,7 +41,7 @@ const Nav = () => {
     };
   }, []);
 
-  // Ferme le menu lorsque l'utilisateur clique sur un lien
+
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
@@ -56,7 +56,7 @@ const Nav = () => {
 >
 
 
-        {/* Liens de navigation à droite */}
+      
         <li className="flex-1 mt-5 sm:text-center color-text hover:shadow-lg transition-shadow duration-300">
           <a href="#entreprise" className="resize-text">
             L'entreprise
@@ -89,7 +89,7 @@ const Nav = () => {
   className="lg:hidden w-full p-2 background-beige flex justify-start items-center" // Fond full-width
   aria-label="Menu"
 >
-  <div className="flex flex-col space-y-1"> {/* Conteneur des barres */}
+  <div className="flex flex-col space-y-1"> 
     <span className="block w-6 h-0.5 bg-black"></span>
     <span className="block w-6 h-0.5 bg-black"></span>
     <span className="block w-6 h-0.5 bg-black"></span>

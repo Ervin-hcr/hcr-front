@@ -126,7 +126,7 @@ export default function Slider() {
         const data = await res.json();
         setItems(data.data || []);
       } catch (err) {
-        console.error("Erreur lors de la récupération :", err);
+   
       }
     };
     fetchData();

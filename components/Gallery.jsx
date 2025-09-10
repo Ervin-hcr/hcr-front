@@ -8,18 +8,18 @@ export default function Gallery() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Détecter si on est en mobile
+
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 640); // sm = 640px
+      setIsMobile(window.innerWidth < 640); 
     };
 
-    handleResize(); // check initial
+    handleResize(); 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
-    // Initialiser visibleCount selon device
+
     if (isMobile) {
       setVisibleCount(3);
     } else {
@@ -40,7 +40,7 @@ export default function Gallery() {
           setPhotos(data.data);
         }
       } catch (error) {
-        console.error("Erreur lors du fetch des photosTravaux :", error);
+
       }
     };
 
@@ -94,7 +94,7 @@ export default function Gallery() {
           <button
             onClick={() =>
               setVisibleCount((prev) =>
-                prev + (isMobile ? 3 : 3) // ajouter 3 photos sur mobile et desktop (tu peux changer si tu veux plus sur desktop)
+                prev + (isMobile ? 3 : 3) 
               )
             }
             className="mt-4 px-6 py-3 bg-button text-white rounded-lg shadow-md hover:shadow-lg cursor-pointer transition"

@@ -12,11 +12,11 @@ export default function Home() {
         );
         const data = await res.json();
         setAccueils(data.data || []);
-        console.log("Données reçues de Strapi:", data);
+   
 
 
       } catch (error) {
-        console.error("Erreur lors du fetch accueil :", error);
+
       }
     };
 
@@ -28,10 +28,10 @@ export default function Home() {
   
       <div className="grid grid-cols-1 gap-6 ">
         {accueils.map((accueil) => {
-          const { id, titre, titre2, imageAccueil } = accueil; // ⚡ mêmes champs au premier niveau
+          const { id, titre, titre2, imageAccueil } = accueil; 
 
           const imageUrl = imageAccueil?.url
-            ? imageAccueil.url // URL déjà complète via Cloudinary
+            ? imageAccueil.url 
             : imageAccueil?.formats?.thumbnail?.url
             ? imageAccueil.formats.thumbnail.url
             : null;

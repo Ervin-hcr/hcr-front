@@ -10,14 +10,14 @@ export default function Business() {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/presentations`);
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         const data = await res.json();
-        console.log("Données reçues :", data);
 
-        // Accès correct à l'élément dans data
+
+       
         if (data.data && data.data.length > 0) {
-          setPresentation(data.data[0]); // on prend le premier objet du tableau
+          setPresentation(data.data[0]); 
         }
       } catch (error) {
-        console.error("Erreur lors du fetch Présentation :", error);
+      
       }
     };
 

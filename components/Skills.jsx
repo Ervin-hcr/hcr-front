@@ -6,7 +6,7 @@ export default function Services() {
   const [services, setServices] = useState([]);
   const [presentation, setPresentation] = useState({ titre: "", description: "" });
   const [visibleCount, setVisibleCount] = useState(6);
-  const cardRefs = useRef([]); // refs pour chaque card
+  const cardRefs = useRef([]); 
 
   // Fetch des services
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function Services() {
         const data = await res.json();
         if (data.data && data.data.length > 0) setServices(data.data);
       } catch (error) {
-        console.error("Erreur lors du fetch des services :", error);
+      
       }
     };
     fetchServices();
@@ -37,7 +37,7 @@ export default function Services() {
           });
         }
       } catch (error) {
-        console.error("Erreur lors du fetch de la présentation :", error);
+ 
       }
     };
     fetchPresentation();
